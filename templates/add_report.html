@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <link rel="stylesheet" href="/static/fonts/iconsminds.css">
+    <link rel="stylesheet" href="/static/fonts/simple-line-icons.css">
+    <link rel="stylesheet" href="/static/css/vendor/smart_wizard.min.css">
+    <link rel="stylesheet" href="/static/css/vendor/bootstrap-tagsinput.css">
+    <link rel="stylesheet" href="/static/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/vendor/bootstrap.rtl.only.min.css">
+    <link rel="stylesheet" href="/static/css/vendor/bootstrap-float-label.min.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/dore.light.bluenavy.min.css" />
+    <link rel="stylesheet" href="/static/css/vendor/component-custom-switch.min.css">
+    <link rel="stylesheet" href="/static/css/vendor/perfect-scrollbar.css"> -->
+
+        <title>CHAG Mentor Mothers Report Portal</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+        <link rel="stylesheet" href="/static/fonts/iconsminds.css">
+        <link rel="stylesheet" href="/static/fonts/simple-line-icons.css">
+        <link rel="stylesheet" href="/static/css/vendor/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/css/vendor/bootstrap.rtl.only.min.css">
+        <link rel="stylesheet" href="/static/css/vendor/bootstrap-float-label.min.css">
+        <link rel="stylesheet" href="/static/css/vendor/perfect-scrollbar.css">
+        <link rel="stylesheet" href="/static/css/vendor/smart_wizard.min.css">
+        <link rel="stylesheet" href="/static/css/vendor/bootstrap-tagsinput.css">
+        <link rel="stylesheet" href="/static/css/dore.light.bluenavy.min.css" />
+        <link rel="stylesheet" href="/static/css/main.css">
+    </head>
+
+    <style>
+        #create:hover {
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body id="app-container" class="menu-default show-spinner">
+    {% include 'extras/navbar.html' %}
+    <div class="menu">
+        <div class="main-menu">
+            <div class="scroll">
+                <ul class="list-unstyled">
+                    <li><a href="#"><i class="iconsminds-shop-4"></i> <span>Home</span></a></li>
+                    <li class="active"><a href="{% url 'reports' %}"><i class="iconsminds-digital-drawing"></i>
+                            Reports</a></li>
+                    <li><a href="#applications"><i class="iconsminds-gear"></i> Tools</a></li>
+                    {% comment %} <li><a href="#ui"><i class="iconsminds-pantone"></i> UI</a></li> {% endcomment %}
+                    {% comment %} <li><a href="#menu"><i class="iconsminds-three-arrow-fork"></i> Menu</a></li>
+                    <li><a href="Blank.Page.html"><i class="iconsminds-bucket"></i> Blank Page</a></li>
+                    <li><a href="https://dore-jquery-docs.coloredstrategies.com" target="_blank"><i {% endcomment %}
+                                {% comment %} class="iconsminds-library"></i> Docs</a></li> {% endcomment %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+    <main>
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <h1>Create Report</h1>
+                    <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
+                        <ol class="breadcrumb pt-0">
+                            <li class="breadcrumb-item"><a href="#">Reports</a></li>
+                            <li class="breadcrumb-item active"><a href="#">Create Report</a></li>
+                        </ol>
+                    </nav>
+                    <div class="separator mb-5"></div>
+                </div>
+            </div>
+
+            <div class="row">
+
+
+                <div class="col-12 mb-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div id="accordion">
+                                <div class="border">
+                                    <button style="font-size: 1.1rem;" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">No. of clients newly and uniquely enrolled into MMS' care and support</button>
+                                    <div id="collapseOne" class="collapse show" data-parent="#accordion" style="">
+                                        <div class="col-12 mb-4">
+                                            <!-- <h5 class="mb-4">No. of clients newly and uniquely enrolled into MMS' care and support</h5> -->
+                                            <div class=" mb-4">
+                                                <div id="smartWizardValidation" class="sw-main sw-theme-check">
+                                                    <ul class="card-header nav nav-tabs step-anchor">
+                                                        <li class="nav-item active"><a href="#step-0" class="nav-link">First
+                                                                Week<br><small>Enter the first week's data</small></a></li>
+                                                        <li class="nav-item"><a href="#step-1" class="nav-link">Second Week<br><small>Enter the
+                                                                    second week's data</small></a></li>
+                                                        <li class="nav-item "><a href="#step-2" class="nav-link">Third Week<br><small>Enter the
+                                                                    third week's data</small></a></li>
+                                                        <li class="nav-item"><a href="#step-3" class="nav-link">Fourth Week<br><small>Enter the
+                                                                    fourth week's data</small></a></li>
+                                                        <li class="nav-item "><a href="#step-4" class="nav-link">Fifth Week<br><small>Enter the
+                                                                    fifth week's data</small></a></li>
+                                                    </ul>
+                                                    <div id="form_hi" class="card-body sw-container tab-content" style="height: 300px;">
+                                                        <div id="step-0" class="tab-pane step-content" style="display: block;">
+                                                            <p style="margin: 0px;">Pregnant Women</p>
+                                                            <small style="margin-bottom: 10px;" class="form-text text-muted">Please enter No. of
+                                                                pregnant women with the indicated age respectively</small>
+                                                            <form id="form-step-0" method="post" action="{% url 'create' %}?table=ClientsNewlyAndUniquelyEnrolledIntoMMSCareAndSupport" class="tooltip-label-right">
+                                                                {% csrf_token %}
+                                                                <input hidden name="week" value="Week 1" type="text">
+                                                                <input hidden name="hospital" value="{{user.pk}}" type="number">
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="pregnant_10_to_14">10 to 14 years</label>
+                                                                        <select name="pregnant_10_to_14" class="form-control" placeholder="10 - 14" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="10">10</option>
+                                                                            <option value="11">11</option>
+                                                                            <option value="12">12</option>
+                                                                            <option value="13">13</option>
+                                                                            <option value="14">14</option>
+                                                                        </select>
+
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="pregnant_15_to_19">15 to 19 years</label>
+                                                                        <select name="pregnant_15_to_19" class="form-control" placeholder="15 - 19" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="15">15</option>
+                                                                            <option value="16">16</option>
+                                                                            <option value="17">17</option>
+                                                                            <option value="18">18</option>
+                                                                            <option value="19">19</option>
+                                                                                
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="pregnant_20_to_24">20 to 24 years</label>
+                                                                        <select name="pregnant_20_to_24" class="form-control" placeholder="20 - 24" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="20">20</option>
+                                                                            <option value="21">21</option>
+                                                                            <option value="22">22</option>
+                                                                            <option value="23">23</option>
+                                                                            <option value="24">24</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="pregnant_25_or_more">25 years or more</label>
+                                                                        <input name="pregnant_25_or_more" type="number" class="form-control" min="25" placeholder="> 25">
+                                                                    </div>
+                                                                </div>
+
+                                                                <p style="margin: 0px;">Breast Feeding Women</p>
+                                                                <small style="margin-bottom: 10px;" class="form-text text-muted">Please enter
+                                                                    No. of brest feeding women with the indicated age respectively</small>
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="feeding_10_to_14">10 to 14 years</label>
+                                                                        <select name="feeding_10_to_14" class="form-control" placeholder="10 - 14" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="10">10</option>
+                                                                            <option value="11">11</option>
+                                                                            <option value="12">12</option>
+                                                                            <option value="13">13</option>
+                                                                            <option value="14">14</option>
+                                                                        </select>
+
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="feeding_15_to_19">15 to 19 years</label>
+                                                                        <select name="feeding_15_to_19" class="form-control" placeholder="15 - 19" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="15">15</option>
+                                                                            <option value="16">16</option>
+                                                                            <option value="17">17</option>
+                                                                            <option value="18">18</option>
+                                                                            <option value="19">19</option>
+                                                                                
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="feeding_20_to_24">20 to 24 years</label>
+                                                                        <select name="feeding_20_to_24" class="form-control" placeholder="20 - 24" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="20">20</option>
+                                                                            <option value="21">21</option>
+                                                                            <option value="22">22</option>
+                                                                            <option value="23">23</option>
+                                                                            <option value="24">24</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="feeding_25_or_more">25 years or more</label>
+                                                                        <input name="feeding_25_or_more" type="number" class="form-control" min="25" placeholder="> 25">
+                                                                    </div>
+                                                                </div>
+
+                                                            </form>
+
+                                                        </div>
+                                                        <div id="step-1" class="tab-pane step-content" style="display: none;">
+                                                            <p style="margin: 0px;">Pregnant Women</p>
+                                                            <small style="margin-bottom: 10px;" class="form-text text-muted">Please enter No. of
+                                                                pregnant women with the indicated age respectively</small>
+                                                            <form id="form-step-1" method="post" action="{% url 'create' %}?table=ClientsNewlyAndUniquelyEnrolledIntoMMSCareAndSupport" class="tooltip-label-right">
+                                                                {% csrf_token %}
+                                                                <input hidden name="week" value="Week 2" type="text">
+                                                                <input hidden name="hospital" value="{{user.pk}}" type="number">
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="pregnant_10_to_14">10 to 14 years</label>
+                                                                        <select name="pregnant_10_to_14" class="form-control" placeholder="10 - 14" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="10">10</option>
+                                                                            <option value="11">11</option>
+                                                                            <option value="12">12</option>
+                                                                            <option value="13">13</option>
+                                                                            <option value="14">14</option>
+                                                                        </select>
+
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="pregnant_15_to_19">15 to 19 years</label>
+                                                                        <select name="pregnant_15_to_19" class="form-control" placeholder="15 - 19" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="15">15</option>
+                                                                            <option value="16">16</option>
+                                                                            <option value="17">17</option>
+                                                                            <option value="18">18</option>
+                                                                            <option value="19">19</option>
+                                                                                
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="pregnant_20_to_24">20 to 24 years</label>
+                                                                        <select name="pregnant_20_to_24" class="form-control" placeholder="20 - 24" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="20">20</option>
+                                                                            <option value="21">21</option>
+                                                                            <option value="22">22</option>
+                                                                            <option value="23">23</option>
+                                                                            <option value="24">24</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="pregnant_25_or_more">25 years or more</label>
+                                                                        <input name="pregnant_25_or_more" type="number" class="form-control" min="25" placeholder="> 25">
+                                                                    </div>
+                                                                </div>
+
+                                                                <p style="margin: 0px;">Breast Feeding Women</p>
+                                                                <small style="margin-bottom: 10px;" class="form-text text-muted">Please enter
+                                                                    No. of brest feeding women with the indicated age respectively</small>
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="feeding_10_to_14">10 to 14 years</label>
+                                                                        <select name="feeding_10_to_14" class="form-control" placeholder="10 - 14" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="10">10</option>
+                                                                            <option value="11">11</option>
+                                                                            <option value="12">12</option>
+                                                                            <option value="13">13</option>
+                                                                            <option value="14">14</option>
+                                                                        </select>
+
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="feeding_15_to_19">15 to 19 years</label>
+                                                                        <select name="feeding_15_to_19" class="form-control" placeholder="15 - 19" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="15">15</option>
+                                                                            <option value="16">16</option>
+                                                                            <option value="17">17</option>
+                                                                            <option value="18">18</option>
+                                                                            <option value="19">19</option>
+                                                                                
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="feeding_20_to_24">20 to 24 years</label>
+                                                                        <select name="feeding_20_to_24" class="form-control" placeholder="20 - 24" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="20">20</option>
+                                                                            <option value="21">21</option>
+                                                                            <option value="22">22</option>
+                                                                            <option value="23">23</option>
+                                                                            <option value="24">24</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="feeding_25_or_more">25 years or more</label>
+                                                                        <input name="feeding_25_or_more" type="number" class="form-control" min="25" placeholder="> 25">
+                                                                    </div>
+                                                                </div>
+
+                                                            </form>
+                                                        </div>
+                                                        <div id="step-2" class="tab-pane step-content" style="display: none;">
+                                                            <p style="margin: 0px;">Pregnant Women</p>
+                                                            <small style="margin-bottom: 10px;" class="form-text text-muted">Please enter No. of
+                                                                pregnant women with the indicated age respectively</small>
+                                                            <form id="form-step-2" method="post" action="{% url 'create' %}?table=ClientsNewlyAndUniquelyEnrolledIntoMMSCareAndSupport" class="tooltip-label-right">
+                                                                {% csrf_token %}
+                                                                <input hidden name="week" value="Week 3" type="text">
+                                                                <input hidden name="hospital" value="{{user.pk}}" type="number">
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="pregnant_10_to_14">10 to 14 years</label>
+                                                                        <select name="pregnant_10_to_14" class="form-control" placeholder="10 - 14" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="10">10</option>
+                                                                            <option value="11">11</option>
+                                                                            <option value="12">12</option>
+                                                                            <option value="13">13</option>
+                                                                            <option value="14">14</option>
+                                                                        </select>
+
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="pregnant_15_to_19">15 to 19 years</label>
+                                                                        <select name="pregnant_15_to_19" class="form-control" placeholder="15 - 19" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="15">15</option>
+                                                                            <option value="16">16</option>
+                                                                            <option value="17">17</option>
+                                                                            <option value="18">18</option>
+                                                                            <option value="19">19</option>
+                                                                                
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="pregnant_20_to_24">20 to 24 years</label>
+                                                                        <select name="pregnant_20_to_24" class="form-control" placeholder="20 - 24" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="20">20</option>
+                                                                            <option value="21">21</option>
+                                                                            <option value="22">22</option>
+                                                                            <option value="23">23</option>
+                                                                            <option value="24">24</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="pregnant_25_or_more">25 years or more</label>
+                                                                        <input name="pregnant_25_or_more" type="number" class="form-control" min="25" placeholder="> 25">
+                                                                    </div>
+                                                                </div>
+
+                                                                <p style="margin: 0px;">Breast Feeding Women</p>
+                                                                <small style="margin-bottom: 10px;" class="form-text text-muted">Please enter
+                                                                    No. of brest feeding women with the indicated age respectively</small>
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="feeding_10_to_14">10 to 14 years</label>
+                                                                        <select name="feeding_10_to_14" class="form-control" placeholder="10 - 14" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="10">10</option>
+                                                                            <option value="11">11</option>
+                                                                            <option value="12">12</option>
+                                                                            <option value="13">13</option>
+                                                                            <option value="14">14</option>
+                                                                        </select>
+
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="feeding_15_to_19">15 to 19 years</label>
+                                                                        <select name="feeding_15_to_19" class="form-control" placeholder="15 - 19" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="15">15</option>
+                                                                            <option value="16">16</option>
+                                                                            <option value="17">17</option>
+                                                                            <option value="18">18</option>
+                                                                            <option value="19">19</option>
+                                                                                
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="feeding_20_to_24">20 to 24 years</label>
+                                                                        <select name="feeding_20_to_24" class="form-control" placeholder="20 - 24" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="20">20</option>
+                                                                            <option value="21">21</option>
+                                                                            <option value="22">22</option>
+                                                                            <option value="23">23</option>
+                                                                            <option value="24">24</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="feeding_25_or_more">25 years or more</label>
+                                                                        <input name="feeding_25_or_more" type="number" class="form-control" min="25" placeholder="> 25">
+                                                                    </div>
+                                                                </div>
+
+                                                            </form>
+
+                                                        </div>
+                                                        <div id="step-3" class="tab-pane step-content" style="display: none;">
+                                                            <p style="margin: 0px;">Pregnant Women</p>
+                                                            <small style="margin-bottom: 10px;" class="form-text text-muted">Please enter No. of
+                                                                pregnant women with the indicated age respectively</small>
+                                                            <form id="form-step-3" method="post" action="{% url 'create' %}?table=ClientsNewlyAndUniquelyEnrolledIntoMMSCareAndSupport" class="tooltip-label-right">
+                                                                {% csrf_token %}
+                                                                <input hidden name="week" value="Week 4" type="text">
+                                                                <input hidden name="hospital" value="{{user.pk}}" type="number">
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="pregnant_10_to_14">10 to 14 years</label>
+                                                                        <select name="pregnant_10_to_14" class="form-control" placeholder="10 - 14" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="10">10</option>
+                                                                            <option value="11">11</option>
+                                                                            <option value="12">12</option>
+                                                                            <option value="13">13</option>
+                                                                            <option value="14">14</option>
+                                                                        </select>
+
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="pregnant_15_to_19">15 to 19 years</label>
+                                                                        <select name="pregnant_15_to_19" class="form-control" placeholder="15 - 19" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="15">15</option>
+                                                                            <option value="16">16</option>
+                                                                            <option value="17">17</option>
+                                                                            <option value="18">18</option>
+                                                                            <option value="19">19</option>
+                                                                                
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="pregnant_20_to_24">20 to 24 years</label>
+                                                                        <select name="pregnant_20_to_24" class="form-control" placeholder="20 - 24" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="20">20</option>
+                                                                            <option value="21">21</option>
+                                                                            <option value="22">22</option>
+                                                                            <option value="23">23</option>
+                                                                            <option value="24">24</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="pregnant_25_or_more">25 years or more</label>
+                                                                        <input name="pregnant_25_or_more" type="number" class="form-control" min="25" placeholder="> 25">
+                                                                    </div>
+                                                                </div>
+
+                                                                <p style="margin: 0px;">Breast Feeding Women</p>
+                                                                <small style="margin-bottom: 10px;" class="form-text text-muted">Please enter
+                                                                    No. of brest feeding women with the indicated age respectively</small>
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="feeding_10_to_14">10 to 14 years</label>
+                                                                        <select name="feeding_10_to_14" class="form-control" placeholder="10 - 14" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="10">10</option>
+                                                                            <option value="11">11</option>
+                                                                            <option value="12">12</option>
+                                                                            <option value="13">13</option>
+                                                                            <option value="14">14</option>
+                                                                        </select>
+
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="feeding_15_to_19">15 to 19 years</label>
+                                                                        <select name="feeding_15_to_19" class="form-control" placeholder="15 - 19" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="15">15</option>
+                                                                            <option value="16">16</option>
+                                                                            <option value="17">17</option>
+                                                                            <option value="18">18</option>
+                                                                            <option value="19">19</option>
+                                                                                
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="feeding_20_to_24">20 to 24 years</label>
+                                                                        <select name="feeding_20_to_24" class="form-control" placeholder="20 - 24" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="20">20</option>
+                                                                            <option value="21">21</option>
+                                                                            <option value="22">22</option>
+                                                                            <option value="23">23</option>
+                                                                            <option value="24">24</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="feeding_25_or_more">25 years or more</label>
+                                                                        <input name="feeding_25_or_more" type="number" class="form-control" min="25" placeholder="> 25">
+                                                                    </div>
+                                                                </div>
+
+                                                            </form>
+
+                                                        </div>
+                                                        <div id="step-4" class="tab-pane step-content" style="display: none;">
+                                                            <p style="margin: 0px;">Pregnant Women</p>
+                                                            <small style="margin-bottom: 10px;" class="form-text text-muted">Please enter No. of
+                                                                pregnant women with the indicated age respectively</small>
+                                                           <form id="form-step-4" method="post" action="{% url 'create' %}?table=ClientsNewlyAndUniquelyEnrolledIntoMMSCareAndSupport" class="tooltip-label-right">
+                                                                {% csrf_token %}
+                                                                <input hidden name="week" value="Week 5" type="text">
+                                                                <input hidden name="hospital" value="{{user.pk}}" type="number">
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="pregnant_10_to_14">10 to 14 years</label>
+                                                                        <select name="pregnant_10_to_14" class="form-control" placeholder="10 - 14" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="10">10</option>
+                                                                            <option value="11">11</option>
+                                                                            <option value="12">12</option>
+                                                                            <option value="13">13</option>
+                                                                            <option value="14">14</option>
+                                                                        </select>
+
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="pregnant_15_to_19">15 to 19 years</label>
+                                                                        <select name="pregnant_15_to_19" class="form-control" placeholder="15 - 19" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="15">15</option>
+                                                                            <option value="16">16</option>
+                                                                            <option value="17">17</option>
+                                                                            <option value="18">18</option>
+                                                                            <option value="19">19</option>
+                                                                                
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="pregnant_20_to_24">20 to 24 years</label>
+                                                                        <select name="pregnant_20_to_24" class="form-control" placeholder="20 - 24" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="20">20</option>
+                                                                            <option value="21">21</option>
+                                                                            <option value="22">22</option>
+                                                                            <option value="23">23</option>
+                                                                            <option value="24">24</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="pregnant_25_or_more">25 years or more</label>
+                                                                        <input name="pregnant_25_or_more" type="number" class="form-control" min="25" placeholder="> 25">
+                                                                    </div>
+                                                                </div>
+
+                                                                <p style="margin: 0px;">Breast Feeding Women</p>
+                                                                <small style="margin-bottom: 10px;" class="form-text text-muted">Please enter
+                                                                    No. of brest feeding women with the indicated age respectively</small>
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="feeding_10_to_14">10 to 14 years</label>
+                                                                        <select name="feeding_10_to_14" class="form-control" placeholder="10 - 14" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="10">10</option>
+                                                                            <option value="11">11</option>
+                                                                            <option value="12">12</option>
+                                                                            <option value="13">13</option>
+                                                                            <option value="14">14</option>
+                                                                        </select>
+
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="feeding_15_to_19">15 to 19 years</label>
+                                                                        <select name="feeding_15_to_19" class="form-control" placeholder="15 - 19" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="15">15</option>
+                                                                            <option value="16">16</option>
+                                                                            <option value="17">17</option>
+                                                                            <option value="18">18</option>
+                                                                            <option value="19">19</option>
+                                                                                
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="feeding_20_to_24">20 to 24 years</label>
+                                                                        <select name="feeding_20_to_24" class="form-control" placeholder="20 - 24" data-width="100%" tabindex="-1">
+                                                                            <option value="0" label="&nbsp;">&nbsp;</option>
+                                                                            <option value="20">20</option>
+                                                                            <option value="21">21</option>
+                                                                            <option value="22">22</option>
+                                                                            <option value="23">23</option>
+                                                                            <option value="24">24</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="feeding_25_or_more">25 years or more</label>
+                                                                        <input name="feeding_25_or_more" type="number" class="form-control" min="25" placeholder="> 25">
+                                                                    </div>
+                                                                </div>
+
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <div class="btn-toolbar custom-toolbar text-center card-body pt-0 sw-container tab-content" style="min-height: 180px;">
+                                                        <button class="btn btn-secondary prev-btn disabled" type="button">Previous</button> 
+                                                            <button class="btn btn-secondary next-btn" type="button" style="">Next</button> 
+                                                        <button class="btn btn-secondary finish-btn"
+                                                            type="submit" style="display: none;">Finish</button></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="border"><button style="font-size: 1.1rem;" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">No. of MM clients newly initiated on ARVs</button>
+                                    <div id="collapseTwo" class="collapse" data-parent="#accordion" style="">
+
+                                    </div>
+                                      
+                                </div>
+                                <div class="border"><button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Collapsible Group Item #3</button>
+                                    <div id="collapseThree" class="collapse" data-parent="#accordion">
+                                        <div class="p-4">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch
+                                            3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad
+                                            vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-12 mb-4">
+                    <h5 class="mb-4">No. of MM clients newly initiated on ARVs </h5>
+                    <div class="card mb-4">
+                        <div id="smartWizardValidation" class="sw-main sw-theme-check">
+                            <ul class="card-header nav nav-tabs step-anchor">
+                                <li class="nav-item active"><a href="#step-0" class="nav-link">First
+                                        Week<br><small>Enter the first week's data</small></a></li>
+                                <li class="nav-item"><a href="#step-1" class="nav-link">Second Week<br><small>Enter the
+                                            second week's data</small></a></li>
+                                <li class="nav-item "><a href="#step-2" class="nav-link">Third Week<br><small>Enter the
+                                            third week's data</small></a></li>
+                                <li class="nav-item"><a href="#step-3" class="nav-link">Fourth Week<br><small>Enter the
+                                            fourth week's data</small></a></li>
+                                <li class="nav-item "><a href="#step-4" class="nav-link">Fifth Week<br><small>Enter the
+                                            fifth week's data</small></a></li>
+                            </ul>
+                            <div id="form_hi" class="card-body sw-container tab-content" style="height: 300px;">
+                                <div id="step-0" class="tab-pane step-content" style="display: block;">
+                                    <p style="margin: 0px;">Pregnant Women</p>
+                                    <small style="margin-bottom: 10px;" class="form-text text-muted">Please enter No. of
+                                        pregnant women with the indicated age respectively</small>
+                                    <form id="form-step-" class="tooltip-label-right" novalidate="novalidate">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">10 to 14 years</label>
+                                                <select class="form-control" placeholder="10 - 14" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                    <option value="13">13</option>
+                                                    <option value="14">14</option>
+                                                </select>
+
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">15 to 19 years</label>
+                                                <select class="form-control" placeholder="15 - 19" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="15">15</option>
+                                                    <option value="16">16</option>
+                                                    <option value="17">17</option>
+                                                    <option value="18">18</option>
+                                                    <option value="19">19</option>
+                                                        
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">20 to 24 years</label>
+                                                <select class="form-control" placeholder="20 - 24" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="20">20</option>
+                                                    <option value="21">21</option>
+                                                    <option value="22">22</option>
+                                                    <option value="23">23</option>
+                                                    <option value="24">24</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputPassword4">25 years or more</label>
+                                                <input type="number" class="form-control" min="25" placeholder="> 25">
+                                            </div>
+                                        </div>
+
+                                        <p style="margin: 0px;">Breast Feeding Women</p>
+                                        <small style="margin-bottom: 10px;" class="form-text text-muted">Please enter
+                                            No. of brest feeding women with the indicated age respectively</small>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">10 to 14 years</label>
+                                                <select class="form-control" placeholder="10 - 14" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                    <option value="13">13</option>
+                                                    <option value="14">14</option>
+                                                </select>
+
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">15 to 19 years</label>
+                                                <select class="form-control" placeholder="15 - 19" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="15">15</option>
+                                                    <option value="16">16</option>
+                                                    <option value="17">17</option>
+                                                    <option value="18">18</option>
+                                                    <option value="19">19</option>
+                                                        
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">20 to 24 years</label>
+                                                <select class="form-control" placeholder="20 - 24" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="20">20</option>
+                                                    <option value="21">21</option>
+                                                    <option value="22">22</option>
+                                                    <option value="23">23</option>
+                                                    <option value="24">24</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputPassword4">25 years or more</label>
+                                                <input type="number" class="form-control" min="25" placeholder="> 25">
+                                            </div>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                                <div id="step-1" class="tab-pane step-content" style="display: none;">
+                                    <p style="margin: 0px;">Pregnant Women</p>
+                                    <small style="margin-bottom: 10px;" class="form-text text-muted">Please enter No. of
+                                        pregnant women with the indicated age respectively</small>
+                                    <form id="form-step-1" class="tooltip-label-right" novalidate="novalidate">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">10 to 14 years</label>
+                                                <select class="form-control" placeholder="10 - 14" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                    <option value="13">13</option>
+                                                    <option value="14">14</option>
+                                                </select>
+
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">15 to 19 years</label>
+                                                <select class="form-control" placeholder="15 - 19" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="15">15</option>
+                                                    <option value="16">16</option>
+                                                    <option value="17">17</option>
+                                                    <option value="18">18</option>
+                                                    <option value="19">19</option>
+                                                        
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">20 to 24 years</label>
+                                                <select class="form-control" placeholder="20 - 24" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="20">20</option>
+                                                    <option value="21">21</option>
+                                                    <option value="22">22</option>
+                                                    <option value="23">23</option>
+                                                    <option value="24">24</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputPassword4">25 years or more</label>
+                                                <input type="number" class="form-control" min="25" placeholder="> 25">
+                                            </div>
+                                        </div>
+
+                                        <p style="margin: 0px;">Breast Feeding Women</p>
+                                        <small style="margin-bottom: 10px;" class="form-text text-muted">Please enter
+                                            No. of brest feeding women with the indicated age respectively</small>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">10 to 14 years</label>
+                                                <select class="form-control" placeholder="10 - 14" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                    <option value="13">13</option>
+                                                    <option value="14">14</option>
+                                                </select>
+
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">15 to 19 years</label>
+                                                <select class="form-control" placeholder="15 - 19" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="15">15</option>
+                                                    <option value="16">16</option>
+                                                    <option value="17">17</option>
+                                                    <option value="18">18</option>
+                                                    <option value="19">19</option>
+                                                        
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">20 to 24 years</label>
+                                                <select class="form-control" placeholder="20 - 24" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="20">20</option>
+                                                    <option value="21">21</option>
+                                                    <option value="22">22</option>
+                                                    <option value="23">23</option>
+                                                    <option value="24">24</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputPassword4">25 years or more</label>
+                                                <input type="number" class="form-control" min="25" placeholder="> 25">
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                                <div id="step-2" class="tab-pane step-content" style="display: none;">
+                                    <p style="margin: 0px;">Pregnant Women</p>
+                                    <small style="margin-bottom: 10px;" class="form-text text-muted">Please enter No. of
+                                        pregnant women with the indicated age respectively</small>
+                                    <form id="form-step-2" class="tooltip-label-right" novalidate="novalidate">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">10 to 14 years</label>
+                                                <select class="form-control" placeholder="10 - 14" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                    <option value="13">13</option>
+                                                    <option value="14">14</option>
+                                                </select>
+
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">15 to 19 years</label>
+                                                <select class="form-control" placeholder="15 - 19" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="15">15</option>
+                                                    <option value="16">16</option>
+                                                    <option value="17">17</option>
+                                                    <option value="18">18</option>
+                                                    <option value="19">19</option>
+                                                        
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">20 to 24 years</label>
+                                                <select class="form-control" placeholder="20 - 24" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="20">20</option>
+                                                    <option value="21">21</option>
+                                                    <option value="22">22</option>
+                                                    <option value="23">23</option>
+                                                    <option value="24">24</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputPassword4">25 years or more</label>
+                                                <input type="number" class="form-control" min="25" placeholder="> 25">
+                                            </div>
+                                        </div>
+
+                                        <p style="margin: 0px;">Breast Feeding Women</p>
+                                        <small style="margin-bottom: 10px;" class="form-text text-muted">Please enter
+                                            No. of brest feeding women with the indicated age respectively</small>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">10 to 14 years</label>
+                                                <select class="form-control" placeholder="10 - 14" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                    <option value="13">13</option>
+                                                    <option value="14">14</option>
+                                                </select>
+
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">15 to 19 years</label>
+                                                <select class="form-control" placeholder="15 - 19" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="15">15</option>
+                                                    <option value="16">16</option>
+                                                    <option value="17">17</option>
+                                                    <option value="18">18</option>
+                                                    <option value="19">19</option>
+                                                        
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">20 to 24 years</label>
+                                                <select class="form-control" placeholder="20 - 24" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="20">20</option>
+                                                    <option value="21">21</option>
+                                                    <option value="22">22</option>
+                                                    <option value="23">23</option>
+                                                    <option value="24">24</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputPassword4">25 years or more</label>
+                                                <input type="number" class="form-control" min="25" placeholder="> 25">
+                                            </div>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                                <div id="step-3" class="tab-pane step-content" style="display: none;">
+                                    <p style="margin: 0px;">Pregnant Women</p>
+                                    <small style="margin-bottom: 10px;" class="form-text text-muted">Please enter No. of
+                                        pregnant women with the indicated age respectively</small>
+                                    <form id="form-step-3" class="tooltip-label-right" novalidate="novalidate">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">10 to 14 years</label>
+                                                <select class="form-control" placeholder="10 - 14" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                    <option value="13">13</option>
+                                                    <option value="14">14</option>
+                                                </select>
+
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">15 to 19 years</label>
+                                                <select class="form-control" placeholder="15 - 19" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="15">15</option>
+                                                    <option value="16">16</option>
+                                                    <option value="17">17</option>
+                                                    <option value="18">18</option>
+                                                    <option value="19">19</option>
+                                                        
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">20 to 24 years</label>
+                                                <select class="form-control" placeholder="20 - 24" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="20">20</option>
+                                                    <option value="21">21</option>
+                                                    <option value="22">22</option>
+                                                    <option value="23">23</option>
+                                                    <option value="24">24</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputPassword4">25 years or more</label>
+                                                <input type="number" class="form-control" min="25" placeholder="> 25">
+                                            </div>
+                                        </div>
+
+                                        <p style="margin: 0px;">Breast Feeding Women</p>
+                                        <small style="margin-bottom: 10px;" class="form-text text-muted">Please enter
+                                            No. of brest feeding women with the indicated age respectively</small>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">10 to 14 years</label>
+                                                <select class="form-control" placeholder="10 - 14" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                    <option value="13">13</option>
+                                                    <option value="14">14</option>
+                                                </select>
+
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">15 to 19 years</label>
+                                                <select class="form-control" placeholder="15 - 19" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="15">15</option>
+                                                    <option value="16">16</option>
+                                                    <option value="17">17</option>
+                                                    <option value="18">18</option>
+                                                    <option value="19">19</option>
+                                                        
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">20 to 24 years</label>
+                                                <select class="form-control" placeholder="20 - 24" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="20">20</option>
+                                                    <option value="21">21</option>
+                                                    <option value="22">22</option>
+                                                    <option value="23">23</option>
+                                                    <option value="24">24</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputPassword4">25 years or more</label>
+                                                <input type="number" class="form-control" min="25" placeholder="> 25">
+                                            </div>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                                <div id="step-4" class="tab-pane step-content" style="display: none;">
+                                    <p style="margin: 0px;">Pregnant Women</p>
+                                    <small style="margin-bottom: 10px;" class="form-text text-muted">Please enter No. of
+                                        pregnant women with the indicated age respectively</small>
+                                    <form id="form-step-4" class="tooltip-label-right" novalidate="novalidate">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">10 to 14 years</label>
+                                                <select class="form-control" placeholder="10 - 14" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                    <option value="13">13</option>
+                                                    <option value="14">14</option>
+                                                </select>
+
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">15 to 19 years</label>
+                                                <select class="form-control" placeholder="15 - 19" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="15">15</option>
+                                                    <option value="16">16</option>
+                                                    <option value="17">17</option>
+                                                    <option value="18">18</option>
+                                                    <option value="19">19</option>
+                                                        
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">20 to 24 years</label>
+                                                <select class="form-control" placeholder="20 - 24" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="20">20</option>
+                                                    <option value="21">21</option>
+                                                    <option value="22">22</option>
+                                                    <option value="23">23</option>
+                                                    <option value="24">24</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputPassword4">25 years or more</label>
+                                                <input type="number" class="form-control" min="25" placeholder="> 25">
+                                            </div>
+                                        </div>
+
+                                        <p style="margin: 0px;">Breast Feeding Women</p>
+                                        <small style="margin-bottom: 10px;" class="form-text text-muted">Please enter
+                                            No. of brest feeding women with the indicated age respectively</small>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">10 to 14 years</label>
+                                                <select class="form-control" placeholder="10 - 14" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                    <option value="13">13</option>
+                                                    <option value="14">14</option>
+                                                </select>
+
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">15 to 19 years</label>
+                                                <select class="form-control" placeholder="15 - 19" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="15">15</option>
+                                                    <option value="16">16</option>
+                                                    <option value="17">17</option>
+                                                    <option value="18">18</option>
+                                                    <option value="19">19</option>
+                                                        
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">20 to 24 years</label>
+                                                <select class="form-control" placeholder="20 - 24" data-width="100%" tabindex="-1">
+                                                    <option label="&nbsp;">&nbsp;</option>
+                                                    <option value="20">20</option>
+                                                    <option value="21">21</option>
+                                                    <option value="22">22</option>
+                                                    <option value="23">23</option>
+                                                    <option value="24">24</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputPassword4">25 years or more</label>
+                                                <input type="number" class="form-control" min="25" placeholder="> 25">
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="btn-toolbar custom-toolbar text-center card-body pt-0 sw-container tab-content" style="min-height: 180px;"><button class="btn btn-secondary prev-btn disabled" type="button">Previous</button> <button class="btn btn-secondary next-btn" type="button" style="">Next</button> <button class="btn btn-secondary finish-btn" type="submit"
+                                    style="display: none;">Finish</button></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 mb-4">
+                    <h5 class="mb-4">Custom Buttons</h5>
+                    <div class="card mb-4">
+                        <div id="smartWizardCustomButtons" class="sw-main sw-theme-default">
+                            <ul class="card-header nav nav-tabs step-anchor">
+                                <li class="nav-item active"><a href="#customButtons1" class="nav-link">Step
+                                        1<br><small>First step description</small></a></li>
+                                <li class="nav-item"><a href="#customButtons2" class="nav-link">Step 2<br><small>Second
+                                            step description</small></a></li>
+                                <li class="nav-item"><a href="#customButtons3" class="nav-link">Step 3<br><small>Third
+                                            step description</small></a></li>
+                            </ul>
+                            <div class="card-body sw-container tab-content" style="min-height: 180.868px;">
+                                <div id="customButtons1" class="tab-pane step-content" style="display: block;">
+                                    <h4 class="pb-2">Step 1 Content</h4>
+                                    <form><label class="form-group has-top-label"><input class="form-control">
+                                            <span>FIRST NAME</span></label> <label class="form-group has-top-label"><input class="form-control" type="password"
+                                                placeholder=""> <span>LAST NAME</span></label></form>
+                                </div>
+                                <div id="customButtons2" class="tab-pane step-content">
+                                    <h4 class="pb-2">Step 2 Content</h4>
+                                    <form><label class="form-group has-top-label"><input class="form-control">
+                                            <span>E-MAIL</span></label> <label class="form-group has-top-label"><input
+                                                class="form-control" id="password" type="password" placeholder="">
+                                            <span>PASSWORD</span></label></form>
+                                </div>
+                                <div id="customButtons3" class="tab-pane step-content">
+                                    <h4 class="pb-2">Step 3 Content</h4>
+                                    <form><label class="form-group has-top-label"><textarea class="form-control"
+                                                rows="3"></textarea> <span>DETAILS</span></label></form>
+                                </div>
+                            </div>
+                            <div class="btn-toolbar custom-toolbar text-center card-body pt-0 sw-container tab-content" style="min-height: 180.868px;"><button class="btn btn-secondary prev-btn" type="button">Previous</button> <button class="btn btn-secondary next-btn" type="button">Next</button> <button class="btn btn-secondary reset-btn" type="submit">Reset</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </main>
+    {% include 'extras/footer.html' %}
+
+
+    <script src="/static/js/vendor/jquery-3.3.1.min.js"></script>
+    <script src="/static/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/vendor/perfect-scrollbar.min.js"></script>
+    <script src="/static/js/vendor/bootstrap-tagsinput.min.js"></script>
+    <script src="/static/js/vendor/jquery.smartWizard.min.js"></script>
+    <script src="/static/js/vendor/jquery.validate/jquery.validate.min.js"></script>
+    <script src="/static/js/vendor/jquery.validate/additional-methods.min.js"></script>
+    <script src="/static/js/dore.script.js"></script>
+    <script src="/static/js/scripts.single.theme.js"></script>
+
+</body>
+
+</html>

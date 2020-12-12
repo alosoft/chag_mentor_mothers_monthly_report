@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+        <title>CHAG Mentor Mothers Report Portal</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <link rel="stylesheet" href="/static/fonts/iconsminds.css">
+    <link rel="stylesheet" href="/static/fonts/simple-line-icons.css">
+    <link rel="stylesheet" href="/static/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/vendor/bootstrap.rtl.only.min.css">
+    <link rel="stylesheet" href="/static/css/vendor/bootstrap-float-label.min.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/dore.light.bluenavy.min.css" />
+</head>
+
+<body class="background show-spinner no-footer">
+    <div class="fixed-background"></div>
+    <main>
+        <div class="container">
+            <div class="row h-100">
+                <div class="col-12 col-md-10 mx-auto my-auto">
+                    <div class="card auth-card">
+                        <div class="position-relative image-side">
+                            <p class="text-white h2">CHAG Monthly Report Portal</p>
+                            <p class="white mb-0">Please use your credentials to login.<br>If you are not a member, please <a style="text-decoration: underline" href="tel:2332454585454" class="white"><strong>Contact Admin</strong></a>.</p>
+                        </div>
+                        <div class="form-side"><a href="#">
+                        Enter your credentials
+                        </a>
+                            <h6 class="mb-4">Login</h6>
+                            <form action="{% url 'home' %}" method="post">
+                            {% csrf_token %}
+                            <label class="form-group has-float-label mb-4"><input class="form-control" type="text" name="email">
+                                    <span>Username</span></label> <label class="form-group has-float-label mb-4"><input
+                                        class="form-control" type="password" placeholder="" name="password">
+                                    <span>Password</span></label>
+                                <div class="d-flex justify-content-between align-items-center"><a href="{% url 'reset' %}">Forget
+                                        password?</a> <button class="btn btn-primary btn-lg btn-shadow" type="submit">LOGIN</button></div>
+                            </form>
+                            {% if messages %}
+                            {% for message in messages %}
+                            <div style="margin-top: 10px;" class="alert alert-danger rounded" role="alert">{{ message }} </div>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="/static/js/vendor/jquery-3.3.1.min.js"></script>
+    <script src="/static/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/dore.script.js"></script>
+    <script src="/static/js/scripts.single.theme.js"></script>
+</body>
+
+</html>

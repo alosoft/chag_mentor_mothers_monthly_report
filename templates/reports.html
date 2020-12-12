@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+        <title>CHAG Mentor Mothers Report Portal</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <link rel="stylesheet" href="/static/css/vendor/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/static/css/vendor/datatables.responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="/static/fonts/iconsminds.css">
+    <link rel="stylesheet" href="/static/fonts/simple-line-icons.css">
+    <link rel="stylesheet" href="/static/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/vendor/bootstrap.rtl.only.min.css">
+    <link rel="stylesheet" href="/static/css/vendor/bootstrap-float-label.min.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/dore.light.bluenavy.min.css" />
+    <link rel="stylesheet" href="/static/css/vendor/component-custom-switch.min.css">
+    <link rel="stylesheet" href="/static/css/vendor/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/static/css/vendor/select2.min.css">
+    <link rel="stylesheet" href="/static/css/vendor/select2-bootstrap.min.css">
+
+    <style>
+        #create:hover {
+            color: white;
+        }
+        .approved{
+            color: green !important;
+            font-weight: bolder;
+        }
+        .awaiting{
+            color: gold !important;
+            font-weight: bolder;
+        }
+        .rejected{
+            color: red !important;
+            font-weight: bolder;
+        }
+    </style>
+
+</head>
+
+<body id="app-container" class="menu-default show-spinner">
+    {% include 'extras/navbar.html' %}
+    <div class="menu">
+        <div class="main-menu">
+            <div class="scroll">
+                <ul class="list-unstyled">
+                    <li><a href="#"><i class="iconsminds-shop-4"></i> <span>Home</span></a></li>
+                    <li class="active"><a href="{% url 'reports' %}"><i class="iconsminds-digital-drawing"></i> Reports</a></li>
+                    <li><a href="#applications"><i class="iconsminds-gears"></i> Tools</a></li>
+                    {% comment %} <li><a href="#ui"><i class="iconsminds-pantone"></i> UI</a></li>
+                    <li><a href="#menu"><i class="iconsminds-three-arrow-fork"></i> Menu</a></li>
+                    <li><a href="Blank.Page.html"><i class="iconsminds-bucket"></i> Blank Page</a></li>
+                    <li><a href="https://dore-jquery-docs.coloredstrategies.com" target="_blank"><i
+                                class="iconsminds-library"></i> Docs</a></li> {% endcomment %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Reports</h1>
+                    <div class="top-right-button-container">
+                        <div class="btn-group">
+                            <a href="{% url 'add_report' %}" id="create" class="btn btn-outline-primary btn-lg">CREATE REPORT</a>
+                            <button class="btn btn-outline-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">EXPORT</button>
+                            <div class="dropdown-menu">
+                                {% comment %} <a class="dropdown-item" id="dataTablesCopy" href="#">Copy</a>
+                                <a class="dropdown-item" id="dataTablesExcel" href="#">Excel</a>
+                                <a class="dropdown-item" id="dataTablesCsv" href="#">Csv</a> {% endcomment %}
+                                <a class="dropdown-item" id="dataTablesPdf" href="#">Pdf</a></div>
+                        </div>
+                    </div>
+                    <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
+                        <ol class="breadcrumb pt-0">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Reports</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Tables</li>
+                        </ol>
+                    </nav>
+                    <div class="mb-2"><a class="btn pt-0 pl-0 d-inline-block d-md-none" data-toggle="collapse" href="#displayOptions" role="button" aria-expanded="true" aria-controls="displayOptions">Display Options <i
+                                class="simple-icon-arrow-down align-middle"></i></a>
+                        <div class="collapse dont-collapse-sm" id="displayOptions">
+                            <div class="d-block d-md-inline-block">
+                                <div class="search-sm d-inline-block float-md-left mr-1 mb-1 align-top"><input class="form-control" placeholder="Search Table" id="searchDatatable"></div>
+                            </div>
+                            <div class="float-md-right dropdown-as-select" id="pageCountDatatable"><span class="text-muted text-small">Displaying 1-10 of 40 items</span><button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">10</button>
+                                <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">5</a>
+                                    <a class="dropdown-item active" href="#">10</a> <a class="dropdown-item" href="#">20</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="separator"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 mb-4 data-table-rows data-tables-hide-filter">
+                    <div id="datatableRows_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                        <div class="row view-filter">
+                            <div class="col-sm-12">
+                                <div class="float-left"></div>
+                                <div class="float-right">
+                                    <div id="datatableRows_filter" class="dataTables_filter"><label>Search:<input
+                                                type="search" class="form-control form-control-sm" placeholder=""
+                                                aria-controls="datatableRows"></label></div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <table id="datatableRows" class="data-table responsive nowrap dataTable no-footer dtr-inline" data-order="[[ 1, &quot;desc&quot; ]]" role="grid" style="width: 1032px;">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting" tabindex="0" aria-controls="datatableRows" rowspan="1" colspan="1" style="width: 297px;" aria-label="Name: activate to sort column ascending">Month</th>
+                                    <th class="sorting_desc" tabindex="0" aria-controls="datatableRows" rowspan="1" colspan="1" style="width: 110px;" 
+                                    aria-sort="descending" aria-label="Sales: activate to sort column ascending">Tables</th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatableRows" rowspan="1" colspan="1" style="width: 112px;" aria-label="Stock: activate to sort column ascending">Status</th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatableRows" rowspan="1" colspan="1" style="width: 152px;" aria-label="Category: activate to sort column ascending">Year</th>
+                                    <th class="empty sorting" tabindex="0" aria-controls="datatableRows" rowspan="1" colspan="1" style="width: 91px;" aria-label="&amp;nbsp;: activate to sort column ascending">&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr role="row" class="odd">
+                                    <td tabindex="0">
+                                        <p class="list-item-heading">January</p>
+                                    </td>
+                                    <td class="sorting_1">
+                                        <p class="text-muted">7</p>
+                                    </td>
+                                    <td style="">
+                                        <p class="text-muted approved">Approved</p>
+                                    </td>
+                                    <td style="">
+                                        <p class="text-muted">2017</p>
+                                    </td>
+                                    <td style=""><label class="custom-control custom-checkbox mb-1 align-self-center data-table-rows-check"><input
+                                                type="checkbox" class="custom-control-input"> <span
+                                                class="custom-control-label">&nbsp;</span></label></td>
+                                </tr>
+                                <tr role="row" class="even">
+                                    <td tabindex="0">
+                                        <p class="list-item-heading">Febuary</p>
+                                    </td>
+                                    <td class="sorting_1">
+                                        <p class="text-muted">9</p>
+                                    </td>
+                                    <td style="">
+                                        <p class=" approved text-muted">Approved</p>
+                                    </td>
+                                    <td style="">
+                                        <p class="text-muted">2017</p>
+                                    </td>
+                                    <td style=""><label class="custom-control custom-checkbox mb-1 align-self-center data-table-rows-check"><input
+                                                type="checkbox" class="custom-control-input"> <span
+                                                class="custom-control-label">&nbsp;</span></label></td>
+                                </tr>
+                                <tr role="row" class="odd">
+                                    <td tabindex="0">
+                                        <p class="list-item-heading">March</p>
+                                    </td>
+                                    <td class="sorting_1">
+                                        <p class="text-muted">4</p>
+                                    </td>
+                                    <td style="">
+                                        <p class="text-muted rejected">Rejected</p>
+                                    </td>
+                                    <td style="">
+                                        <p class="text-muted">2020</p>
+                                    </td>
+                                    <td style=""><label class="custom-control custom-checkbox mb-1 align-self-center data-table-rows-check"><input
+                                                type="checkbox" class="custom-control-input"> <span
+                                                class="custom-control-label">&nbsp;</span></label></td>
+                                </tr>
+                                <tr role="row" class="even">
+                                    <td tabindex="0">
+                                        <p class="list-item-heading">April</p>
+                                    </td>
+                                    <td class="sorting_1">
+                                        <p class="text-muted">14</p>
+                                    </td>
+                                    <td style="">
+                                        <p class="text-muted awaiting">Awaiting Approval</p>
+                                    </td>
+                                    <td style="">
+                                        <p class="text-muted">2020</p>
+                                    </td>
+                                    <td style=""><label class="custom-control custom-checkbox mb-1 align-self-center data-table-rows-check"><input
+                                                type="checkbox" class="custom-control-input"> <span
+                                                class="custom-control-label">&nbsp;</span></label></td>
+                                </tr>
+                                <tr role="row" class="odd">
+                                    <td tabindex="0">
+                                        <p class="list-item-heading">May</p>
+                                    </td>
+                                    <td class="sorting_1">
+                                        <p class="text-muted">10</p>
+                                    </td>
+                                    <td style="">
+                                        <p class="text-muted approved">Approved</p>
+                                    </td>
+                                    <td style="">
+                                        <p class="text-muted">2020</p>
+                                    </td>
+                                    <td style=""><label class="custom-control custom-checkbox mb-1 align-self-center data-table-rows-check"><input
+                                                type="checkbox" class="custom-control-input"> <span
+                                                class="custom-control-label">&nbsp;</span></label></td>
+                                </tr>
+                                <tr role="row" class="even">
+                                    <td tabindex="0">
+                                        <p class="list-item-heading">June</p>
+                                    </td>
+                                    <td class="sorting_1">
+                                        <p class="text-muted">9</p>
+                                    </td>
+                                    <td style="">
+                                        <p class="text-muted awaiting">Awaiting Approval</p>
+                                    </td>
+                                    <td style="">
+                                        <p class="text-muted">2016</p>
+                                    </td>
+                                    <td style=""><label class="custom-control custom-checkbox mb-1 align-self-center data-table-rows-check"><input
+                                                type="checkbox" class="custom-control-input"> <span
+                                                class="custom-control-label">&nbsp;</span></label></td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    {% include 'extras/footer.html' %}
+    <!-- <script src="/static/js/vendor/jquery-3.3.1.min.js"></script>
+    <script src="/static/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/vendor/perfect-scrollbar.min.js"></script>
+    <script src="/static/js/vendor/mousetrap.min.js"></script> -->
+    <script src="/static/js/vendor/jquery-3.3.1.min.js"></script>
+    <script src="/static/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/vendor/perfect-scrollbar.min.js"></script>
+    <script src="/static/js/vendor/jquery.validate/jquery.validate.min.js"></script>
+    <script src="/static/js/vendor/jquery.validate/additional-methods.min.js"></script>
+    <script src="/static/js/vendor/datatables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+    <script src="/static/js/vendor/select2.full.js "></script>
+    <script src="/static/js/dore.script.js "></script>
+    <script src="/static/js/scripts.single.theme.js "></script>
+</body>
+
+</html>
